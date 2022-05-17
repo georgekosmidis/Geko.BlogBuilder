@@ -1,0 +1,96 @@
+<script nonce="@Model.Nonce">
+	const RegionalDateTimeFormat = function( datetime ) {
+		//thanks: https://stackoverflow.com/questions/2388115/get-locale-short-date-format-using-javascript
+
+		if(Object.prototype.toString.call(datetime) !== '[object Date]') {
+			throw "Argument 'datetime' of method 'RegionalDateTimeFormat' is not an object Date!";
+		}
+		var optionsDate = {
+			weekday: "short",
+			year: "numeric",
+			month: "short",
+			day: "numeric"
+		};
+
+		//undefined: expected output varies according to local timezone and default locale
+		document.write( datetime.toLocaleDateString(undefined, optionsDate) );
+
+		if(datetime.getHours() != 0) {
+			var optionsTime = {
+				hour: "2-digit",
+				minute: "2-digit",
+				timeZoneName: "short" 
+			};
+			document.write( " <strong>@@</strong> " );
+			//undefined: expected output varies according to local timezone and default locale
+			document.write( datetime.toLocaleTimeString(undefined, optionsTime) );
+		}
+	}
+</script>
+@{
+	var attrTitle = @Model.Title.Replace("\"", "");
+}
+<div class="card shadow">
+@if ( !string.IsNullOrWhiteSpace(@Model.ImageUrl) ) {
+	<img src="@Model.ImageUrl" class="bd-placeholder-img card-img-top" alt="attrTitle" />
+}
+	<h2 class="card-title card-header">@Model.Title</h2>
+	<div class="card-body">
+		@if ( !string.IsNullOrWhiteSpace(@Model.Description) ) {
+			<p class="card-text">@Model.Description</p>
+		}
+		<div class="list-group">
+			@foreach( var evnt in @Model.CalendarEvents )
+			{
+				var eventAttrTitle = @Model.Title.Replace("\"", "");
+				<div class="container p-1">
+					<div class="row">
+						<div class="col-12 mb-1">
+							<a href="@evnt.Url" target="_blank" title="@eventAttrTitle" rel="noopener"><strong>@evnt.Title</strong></a>
+						</div>
+					</div>
+					<div class="row ps-1">
+						<div class="col-1 ps-3 pe-0 my-auto d-flex">
+							<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-calendar3" viewBox="0 0 16 16">
+								<path d="M14 0H2a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zM1 3.857C1 3.384 1.448 3 2 3h12c.552 0 1 .384 1 .857v10.286c0 .473-.448.857-1 .857H2c-.552 0-1-.384-1-.857V3.857z"/>
+								<path d="M6.5 7a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-9 3a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-9 3a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/>
+							</svg>
+						</div>
+						<div class="col-11 px-1 my-auto d-flex">
+							<small>
+								<!-- Method RegionalDateTimeFormat is in template-layout.cshtml -->
+								<script nonce="@Model.Nonce">
+									RegionalDateTimeFormat( 
+										new Date("@evnt.DateTime.ToString("o")") 
+									);
+								</script>
+							</small>
+						</div>
+					</div>
+					<div class="row ps-1">
+						<div class="col-1 ps-3 pe-0 my-auto d-flex">
+							<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-geo-alt" viewBox="0 0 16 16">
+								<path d="M12.166 8.94c-.524 1.062-1.234 2.12-1.96 3.07A31.493 31.493 0 0 1 8 14.58a31.481 31.481 0 0 1-2.206-2.57c-.726-.95-1.436-2.008-1.96-3.07C3.304 7.867 3 6.862 3 6a5 5 0 0 1 10 0c0 .862-.305 1.867-.834 2.94zM8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10z"/>
+								<path d="M8 8a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm0 1a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+							</svg>
+						</div>
+						<div class="col-11 px-1 my-auto d-flex">
+							<small>@evnt.Place</small>
+						</div>
+					</div>
+					<div class="row ps-1">
+						<div class="col-1 ps-3 pe-0 my-auto d-flex">
+							<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-people" viewBox="0 0 16 16">
+								<path d="M15 14s1 0 1-1-1-4-5-4-5 3-5 4 1 1 1 1h8zm-7.978-1A.261.261 0 0 1 7 12.996c.001-.264.167-1.03.76-1.72C8.312 10.629 9.282 10 11 10c1.717 0 2.687.63 3.24 1.276.593.69.758 1.457.76 1.72l-.008.002a.274.274 0 0 1-.014.002H7.022zM11 7a2 2 0 1 0 0-4 2 2 0 0 0 0 4zm3-2a3 3 0 1 1-6 0 3 3 0 0 1 6 0zM6.936 9.28a5.88 5.88 0 0 0-1.23-.247A7.35 7.35 0 0 0 5 9c-4 0-5 3-5 4 0 .667.333 1 1 1h4.216A2.238 2.238 0 0 1 5 13c0-1.01.377-2.042 1.09-2.904.243-.294.526-.569.846-.816zM4.92 10A5.493 5.493 0 0 0 4 13H1c0-.26.164-1.03.76-1.724.545-.636 1.492-1.256 3.16-1.275zM1.5 5.5a3 3 0 1 1 6 0 3 3 0 0 1-6 0zm3-2a2 2 0 1 0 0 4 2 2 0 0 0 0-4z"/>
+							</svg>
+						</div>
+						<div class="col-11 px-1 my-auto d-flex">
+							<small><a href="@evnt.OrganizerUrl" target="_blank" title="@evnt.Organizer" rel="noopener">@evnt.Organizer</a></small>
+						</div>
+					</div>
+				</div>
+			}
+		</div>
+		<div class="card-text text-end"><small class="text-muted">@Model.Footer</small></div>
+	</div>
+</div>

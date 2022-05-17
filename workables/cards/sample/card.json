@@ -1,0 +1,12 @@
+{
+  "TemplateDataModel": "CardImageModel",
+  "Title": "Microsoft MVP - George Kosmidis",
+  "Description": "Microsoft MVP - George Kosmidis",
+  "Footer": "",
+  "Link": "https://mvp.microsoft.com/en-us/PublicProfile/5004591",
+  "LinkTarget": "_blank",
+  "ImageUrl": "/media/image-card.jpg",
+  "Position": 3,
+  "IsSticky": true,
+  "RightColumnPosition" : 1
+}

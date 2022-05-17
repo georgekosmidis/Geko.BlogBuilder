@@ -1,0 +1,7 @@
+@{
+	var attrTitle = @Model.Title.Replace("\"", "");
+}
+<div class="card shadow">
+	<img src="@Model.ImageUrl" class="bd-placeholder-img card-img-top" alt="@attrTitle">
+	<a href="@Model.Link"  target="@Model.LinkTarget" title="@attrTitle" class="stretched-link" rel="noopener"></a>
+</div>

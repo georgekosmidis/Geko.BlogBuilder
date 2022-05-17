@@ -1,0 +1,13 @@
+{
+  "RelativeUrl": "/just-add-a-url-you-want-this-article-to-live.html",
+  "Title": "This is a sample blog post",
+  "Description": "That's a small description for the card view",
+  "DatePublished": "2013-04-25T13:51:24+02:00",
+  "DateModified": "2021-12-26T17:23:53+01:00",
+  "RelativeImageUrl": "/media/100010-sample.jpg",
+  "Tags": [
+    "one tag",
+    "two tags",
+	"more tags"
+  ]
+}

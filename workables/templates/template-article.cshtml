@@ -1,0 +1,117 @@
+@using Blog.Builder.Models.Templates;
+
+<div class="container">
+	<div class="row mx-auto article-google-engine-top">
+		<div class="col pb-4">
+			<div class="card text-center bg-transparent border-0" style="height:33px">
+				<script async src="https://cse.google.com/cse.js?cx=c67a1214306f44e87" nonce="@Model.Nonce"></script>
+				<div class="gcse-searchbox-only"></div>
+			</div>
+		</div>
+	</div>
+	<div class="row mx-auto">
+		<div class="col-lg-8 mb-4 shadow bg-white rounded">
+			<div class="container article">
+				<div class="row border-end border-start border-bottom bg-light">
+					<div class="col" style="text-align: center">
+						<a class="btn align-middle" href="@Model.GithubCurrentPageUrl" role="button" style="text-decoration:none" target="_blank" rel="noopener">
+							<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" viewBox="0 0 16 16">
+								<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
+							</svg>
+							Edit Page
+						</a>
+
+						<a class="btn align-middle" href="@Model.GithubRepoUrl/issues/new?permalink=@Model.GithubCurrentPageUrl" role="button" style="text-decoration:none" target="_blank" rel="noopener">
+							<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" viewBox="0 0 24 24">
+								<path fill-rule="evenodd" d="M2.5 12a9.5 9.5 0 1119 0 9.5 9.5 0 01-19 0zM12 1C5.925 1 1 5.925 1 12s4.925 11 11 11 11-4.925 11-11S18.075 1 12 1zm0 13a2 2 0 100-4 2 2 0 000 4z"></path>
+							</svg>
+							Create Issue
+						</a>
+
+						<a class="btn align-middle" href="https://twitter.com/intent/tweet?text=I%20have%20a%20question%20about%20this%20post&url=@Model.BlogUrl@Model.RelativeUrl&via=@Model.TwitterHandle" role="button" style="text-decoration:none" target="_blank" rel="noopener">
+							<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" viewBox="0 0 16 16">
+								<path d="M5.026 15c6.038 0 9.341-5.003 9.341-9.334 0-.14 0-.282-.006-.422A6.685 6.685 0 0 0 16 3.542a6.658 6.658 0 0 1-1.889.518 3.301 3.301 0 0 0 1.447-1.817 6.533 6.533 0 0 1-2.087.793A3.286 3.286 0 0 0 7.875 6.03a9.325 9.325 0 0 1-6.767-3.429 3.289 3.289 0 0 0 1.018 4.382A3.323 3.323 0 0 1 .64 6.575v.045a3.288 3.288 0 0 0 2.632 3.218 3.203 3.203 0 0 1-.865.115 3.23 3.23 0 0 1-.614-.057 3.283 3.283 0 0 0 3.067 2.277A6.588 6.588 0 0 1 .78 13.58a6.32 6.32 0 0 1-.78-.045A9.344 9.344 0 0 0 5.026 15z"/>
+							</svg>
+							Discuss
+						</a>
+
+						<a class="btn ms-4" href="/" role="button" style="text-decoration:none">
+							<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" class="mb-1" fill="currentColor" class="bi bi-house-fill" viewBox="0 0 16 16">
+								<path fill-rule="evenodd" d="m8 3.293 6 6V13.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 13.5V9.293l6-6zm5-.793V6l-2-2V2.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5z"></path>
+								<path fill-rule="evenodd" d="M7.293 1.5a1 1 0 0 1 1.414 0l6.647 6.646a.5.5 0 0 1-.708.708L8 2.207 1.354 8.854a.5.5 0 1 1-.708-.708L7.293 1.5z"></path>
+							</svg>
+							Go Home
+						</a>
+					</div>  
+				</div>
+				<div class="row">
+					<div class="col mt-3">
+						<h1 class="text-center display-6">@Model.Title</h1>
+					</div>  
+				</div>		
+				<div class="row">
+					<div class="col pb-2">
+						<div class="text-black-50 text-center">
+							@{
+								var articleDate = Model.DateModifiedText == Model.DatePublishedText
+										? $"Published {Model.DatePublishedText}"
+										: $"Published {Model.DatePublishedText}, modified {Model.DateModifiedText}";
+							}
+						  <small>by <a href="@Model.AuthorPersonalPage" rel="noopener">@Model.AuthorName</a> / @articleDate</small>
+						</div>
+					</div>  
+				</div>	
+@if ( !string.IsNullOrWhiteSpace(@Model.RelativeImageUrl) ) {
+				<div class="row">
+					<div class="col text-center">
+						<img src="@Model.RelativeImageUrl" alt="@Model.Title"/>
+					</div>
+				</div>
+}
+				<div class="row">
+					<div class="col pt-3 pb-6">
+						@Model.Body
+					</div>
+				</div>				
+				<div class="row border-end border-start border-top bg-light mt-4">
+					<div class="col pt-2" style="text-align: center">
+						This page is <strong>open source</strong>. Noticed a typo? Or something unclear?<br />
+						<a class="btn align-middle" href="@Model.GithubCurrentPageUrl" role="button" style="text-decoration:none" target="_blank" rel="noopener">
+							<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" viewBox="0 0 16 16">
+								<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
+							</svg>
+							Edit Page
+						</a>
+
+						<a class="btn align-middle" href="@Model.GithubRepoUrl/issues/new?permalink=@Model.GithubCurrentPageUrl" role="button" style="text-decoration:none" target="_blank" rel="noopener">
+							<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" viewBox="0 0 24 24">
+								<path fill-rule="evenodd" d="M2.5 12a9.5 9.5 0 1119 0 9.5 9.5 0 01-19 0zM12 1C5.925 1 1 5.925 1 12s4.925 11 11 11 11-4.925 11-11S18.075 1 12 1zm0 13a2 2 0 100-4 2 2 0 000 4z"></path>
+							</svg>
+							Create Issue
+						</a>
+
+						<a class="btn align-middle" href="https://twitter.com/intent/tweet?text=I%20have%20a%20question%20about%20this%20post!&url=@Model.BlogUrl@Model.RelativeUrl&via=@Model.TwitterHandle" role="button" style="text-decoration:none" target="_blank" rel="noopener">
+							<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" viewBox="0 0 16 16">
+								<path d="M5.026 15c6.038 0 9.341-5.003 9.341-9.334 0-.14 0-.282-.006-.422A6.685 6.685 0 0 0 16 3.542a6.658 6.658 0 0 1-1.889.518 3.301 3.301 0 0 0 1.447-1.817 6.533 6.533 0 0 1-2.087.793A3.286 3.286 0 0 0 7.875 6.03a9.325 9.325 0 0 1-6.767-3.429 3.289 3.289 0 0 0 1.018 4.382A3.323 3.323 0 0 1 .64 6.575v.045a3.288 3.288 0 0 0 2.632 3.218 3.203 3.203 0 0 1-.865.115 3.23 3.23 0 0 1-.614-.057 3.283 3.283 0 0 0 3.067 2.277A6.588 6.588 0 0 1 .78 13.58a6.32 6.32 0 0 1-.78-.045A9.344 9.344 0 0 0 5.026 15z"/>
+							</svg>
+							Discuss
+						</a>
+					</div>  
+				</div>
+			</div>
+		</div>
+		<div class="col-lg-4">
+			<div class="container px-0 mx-0 right-column-container">
+				@foreach(var card in @Model.RightColumnCards){
+					<div class="col mb-4">
+					@card
+					</div>
+				}
+			</div>
+		</div>
+	</div>
+		<div class="col-lg-4">
+			&nbsp;
+		</div>
+	</div>
+</div>

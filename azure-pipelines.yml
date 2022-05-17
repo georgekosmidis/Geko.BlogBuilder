@@ -1,0 +1,54 @@
+schedules:
+- cron: "0 0 * * *"
+  displayName: Daily midnight build
+  branches:
+    include:
+    - main
+  always: true
+
+pool:
+  vmImage: ubuntu-latest
+
+variables:
+  tmpFolder: 'tmp'
+  buildConfiguration: 'Release'
+
+steps:
+- task: UseDotNet@2
+  displayName: Use .NET 6
+  inputs:
+    packageType: 'sdk'
+    version: '6.0.x'  
+
+- task: DotNetCoreCLI@2
+  displayName: Build all solutions
+  inputs:
+    command: 'build'
+    projects: '_src/*.sln'
+
+- task: DotNetCoreCLI@2
+  displayName: Publishing to $(tmpFolder)
+  inputs:
+    command: 'publish'
+    publishWebProjects: false
+    projects: '_src/Blog.Builder.sln'
+    arguments: '-c $(buildConfiguration) -o $(tmpFolder)'
+    zipAfterPublish: false
+    modifyOutputPath: false
+
+- task: PowerShell@2
+  displayName: Running Blog Builder
+  inputs:
+    targetType: 'inline'
+    script: |
+      Set-Location -Path $(tmpFolder)
+      dotnet Blog.Builder.dll --workables ../workables --output ../_output
+    failOnStderr: true
+    showWarnings: true
+
+- task: AzureStaticWebApp@0
+  displayName: Push to Azure
+  inputs:
+    app_location: '_output/'
+    skip_app_build: true
+    azure_static_web_apps_api_token: '$(deployment_token)'

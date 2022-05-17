@@ -1,0 +1,358 @@
+@using Blog.Builder.Models;
+
+<!doctype html>
+<html lang="en" prefix="og: https://ogp.me/ns#">
+
+<head>
+    <meta charset="utf-8" />
+	<base href="@Model.BlogUrl" />
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+	<meta name="description" content="@Model.PlainTextDescription" />
+	<meta name="author" content="@Model.AuthorName" />	
+	<meta http-equiv="Content-Security-Policy" content="script-src 'nonce-@Model.Nonce'" />
+
+	<link rel="me" type="text/html" href="https://twitter.com/@Model.TwitterHandle" />
+	<link rel="me" type="text/html" href="@Model.AuthorPersonalPage" />
+
+	<link rel="icon" type="image/jpg" href="/media/me_180x180.jpg" />
+	<link rel="apple-touch-icon" type="image/jpg" sizes="180x180" href="/media/me_180x180.jpg" />
+
+	<meta property="og:title" content="@Model.Title" />
+@if ( @Model.TemplateDataModel == "LayoutArticleModel" ) {
+	<meta property="og:type" content="article" />
+}
+else {
+    <meta property="og:type" content="website" />
+}
+	<meta property="og:url" content="@(Model.BlogUrl)@(Model.RelativeUrl)" />
+@if ( !string.IsNullOrWhiteSpace(@Model.RelativeImageUrl) ) {
+	<meta property="og:image" content="@(Model.BlogUrl)@(Model.RelativeImageUrl)" />
+}
+	<meta property="og:description " content="@Model.PlainTextDescription" />
+	
+    @Model.ExtraHeadersText
+	
+@if ( @Model.TemplateDataModel == "LayoutArticleModel" ) {
+	<meta property="og:article:published_time" content="@Model.DatePublished" />
+	<meta property="og:article:modified_time" content="@Model.DateModified" />
+	<meta property="og:article:expiration_time" content="@Model.DateExpires" />
+    <!-- todo: author should be part of the article model -->
+	<meta property="og:article:author" content="@Model.AuthorName" />
+	<meta property="og:article:section" content="@Model.SectionsText" />
+	<meta property="og:article:tag" content=" @Model.TagsText" />
+}
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous" />
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.css" 
+		integrity="sha256-zQ0LblD/Af8vOppw18+2anxsuaz3pWYyVWi+bTvTH8Q=" crossorigin="anonymous" />    
+@if ( @Model.TemplateDataModel == "LayoutArticleModel" ) {
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@@highlightjs/cdn-assets@11.4.0/styles/vs2015.min.css" 
+        integrity="sha256-Pi771++jBrwgeHVYGOa1sjN8idXlrrYSKQVI7+JA54k=" crossorigin="anonymous">	
+}	
+	<title>@Model.Title</title>
+    <style>
+        header {
+            background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.8) 100%, rgba(0, 0, 0, 1) 100%), url(/media/header_bg.png);
+            background-size: cover;
+            background-position: 50% 50%;
+        }
+
+        header svg {
+            width: 25px;
+            fill: #f8f9fa;
+        }
+        footer svg {
+            width: 25px;
+            fill: black;
+        }        
+
+        .me {
+            width: 180px;
+            height: 180px;
+        }
+		.article{
+		  overflow-wrap: break-word;
+		  word-wrap: break-word;
+		  -ms-word-break: break-all;
+		  word-break: break-all;
+		  word-break: break-word;
+		  -ms-hyphens: auto;
+		  -moz-hyphens: auto;
+		  -webkit-hyphens: auto;
+		  hyphens: auto;		
+		}
+		
+		.article img {
+			max-width: 100%;
+			height: auto;
+		}		
+		h1,h2,h3,h4,h5,h6 {
+			font-weight: 400;
+		}
+        h2{
+             margin-top: 4rem;
+        }
+        .right-column-container h2,
+        .index-card-wrapper h2{
+            margin-top: 0px;
+        }
+        h3 {
+            margin-top: 3rem;
+        }
+        h4, h5 {
+            margin-top: 2rem;
+        }
+        th, strong, b {
+            font-weight: 500;
+        }
+		a {
+			text-decoration: none;
+		}
+		a:hover {
+			text-decoration: underline;
+		}
+        a.btn svg {
+            margin-bottom:3px
+        }
+		
+		.article-google-engine-top,
+		.article-google-engine-left {
+			display: none;
+		}
+				
+        @@media (min-width: 992px) {
+            .container {
+                max-width: 1200px
+            }
+
+            header > .container {
+                max-width: 768px;
+            }
+			.article-google-engine-left {
+				display: block;
+			}			
+        }
+		
+		/* https://getbootstrap.com/docs/5.1/layout/breakpoints/ */		
+		@@media (max-width: 991.98px) {  
+            .container {
+                padding-right: calc(var(--bs-gutter-x) * .3);
+                padding-left: calc(var(--bs-gutter-x) * .3);
+            }
+			.article-google-engine-top {
+				display: block;
+			}				
+		}			
+    </style>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-3071108-41" nonce="@Model.Nonce"></script>
+<script nonce="@Model.Nonce">
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-3071108-41');
+</script>
+
+</head>
+
+<body class="bg-light">
+
+    <header class="container-fluid p-3 bg-dark border-bottom">
+
+        <div class="container text-white">
+            <div class="row">
+                <div class="col-sm-12 col-md-3 text-center">
+					<a href="/">
+						<img src="/media/me_180x180.jpg" class="rounded-circle border border-dark me" alt="@Model.BlogTitle - @Model.PlainTextDescription" />
+					</a>
+                </div>
+                <div class="col-sm-12 col-md-9">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col">
+                                <h1 class="display-5 text-center">@Model.BlogTitle</h1>
+                                <small class="d-block text-center">@Model.BlogDescription</small>
+                            </div>
+                        </div>
+                        <div class="row mt-4">
+                            <div class="col text-center">
+                                <a href="https://twitter.com/@Model.TwitterHandle" target="_blank" class="btn" rel="noopener">
+                                    <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                        <title>Twitter</title>
+                                        <path
+                                            d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"></path>
+                                    </svg>
+                                </a>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="container bg-light pt-4 pb-5">
+        <div class="row masonry">
+            @Model.Body
+        </div>
+    </main>
+
+@if (@Model.TemplateDataModel == "LayoutIndexModel") {
+    <nav aria-label="Page navigation">
+        <ul class="pagination justify-content-center">
+            @{
+                //previous page
+                var disabled = "";
+                var previousLink = $"/index-page-{@Model.Paging.CurrentPageIndex}.html";
+                if (@Model.Paging.CurrentPageIndex == 0)
+                {
+                    disabled = "disabled";
+                }
+                if (@Model.Paging.CurrentPageIndex <= 1)
+                {
+                    previousLink = $"/";//index html
+                }
+                
+                <li class="page-item @disabled">
+                    <a class="page-link" href="@previousLink">Previous</a>
+                </li>
+
+                //sliding window for paging:
+                var windowSize = 5;
+                var startPage = 0;
+                var endPage = startPage + windowSize;
+                if( @Model.Paging.CurrentPageIndex > windowSize / 2 ) {
+                    startPage = @Model.Paging.CurrentPageIndex - (int)Math.Floor(windowSize / 2d);
+                    endPage = @Model.Paging.CurrentPageIndex + (int)Math.Ceiling(windowSize / 2d);
+                    endPage = Math.Min(@Model.Paging.PageCount, endPage);
+
+                    if( endPage - startPage <= windowSize ) {
+                        startPage = endPage - windowSize;
+                    }
+                }
+
+                //if start is hidden, show three dots to go there
+                if(startPage > 0) {
+                     <li class="page-item"><a class="page-link" href="/">...</a></li>
+                }
+
+                for (var i = startPage; i < endPage; i++)
+                {
+                    var active = "";
+                    var currentLink = $"/index-page-{i + 1}.html";
+                    if (i == 0)
+                    {
+                        currentLink = $"/";
+                    }
+                    if (i == @Model.Paging.CurrentPageIndex)
+                    {
+                        active = "active";
+                    }
+                    
+                    <li class="page-item @active"><a class="page-link" href="@currentLink">@(i + 1)</a></li>
+                }
+
+                //if end is hidden, show three dots to go there
+                if(endPage < Model.Paging.PageCount) {
+                     <li class="page-item"><a class="page-link" href="/index-page-@(Model.Paging.PageCount).html">...</a></li>
+                }
+
+                //next page
+                disabled = "";
+                var nextLink = $"/index-page-{@Model.Paging.CurrentPageIndex + 2}.html";
+                if (@Model.Paging.CurrentPageIndex == @Model.Paging.PageCount - 1)
+                {
+                    nextLink = $"/index-page-{@Model.Paging.CurrentPageIndex + 1}.html";
+                    disabled = "disabled";
+                }
+                
+                <li class="page-item @disabled">
+                <a class="page-link" href="@nextLink">Next</a>
+                </li>
+            }
+        </ul>
+    </nav>
+}
+
+    <footer class="footer mt-auto py-3 border-top">
+        <div class="container mx-auto text-center">
+            <a href="https://twitter.com/@Model.TwitterHandle" target="_blank" class="btn" rel="noopener">
+                <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <title>Twitter</title>
+                    <path
+                        d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"></path>
+                </svg>
+            </a>
+            
+			<div class="text-muted">© Copyright 2022, <a href="@Model.AuthorPersonalPage" target="_blank" rel="noopener">@Model.AuthorName</a>
+                                    <br /> Is lawyer the most boring job in the world? Read the <a href="/privacy.html">Privacy Policy</a> to find out.
+                                    <br /><small class="text-black-50">Last Build: @Model.LastBuild.ToString("yyyy-MM-ddTHH:mm:sszzz") </small>
+            </div>
+
+        </div>
+    </footer>
+
+@if ( @Model.TemplateDataModel == "LayoutIndexModel" ){
+    <script src="https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js"
+        integrity="sha384-GNFwBvfVxBkLMJpYMOABq3c+d3KnQxudP/mGPkzpZSTYykLBNsZEnG2D9G/X/+7D"
+		crossorigin="anonymous"
+		nonce="@Model.Nonce"></script>
+    <script src="https://cdn.jsdelivr.net/npm/imagesloaded@4.1.4/imagesloaded.pkgd.min.js" 
+        integrity="sha256-lqvxZrPLtfffUl2G/e7szqSvPBILGbwmsGE1MKlOi0Q=" 
+        crossorigin="anonymous"
+        nonce="@Model.Nonce"></script>
+
+    <script nonce="@Model.Nonce">  
+        imagesLoaded( document.querySelector('.masonry'), function( instance ) {
+            var msnry = new Masonry( '.masonry', {
+                percentPosition: true,
+                itemSelector: '.index-card-wrapper'
+            });  
+            msnry.layout();
+        });
+    </script>
+}
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"
+		nonce="@Model.Nonce"
+		></script>
+	<script src="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.js" 
+		integrity="sha256-5VhCqFam2Cn+yjw61zbBNrbHVJ6SRydPeKopYlngbiQ=" 
+		crossorigin="anonymous"
+		nonce="@Model.Nonce"
+		></script>
+@if ( @Model.TemplateDataModel == "LayoutArticleModel" ) {
+    <script src="https://cdn.jsdelivr.net/npm/@@highlightjs/cdn-assets@11.4.0/highlight.min.js" 
+            integrity="sha256-GCgWKkl4RE3+M/TNH5d/F80Tz30PQT+Oubq5Q3I5c20=" 
+            crossorigin="anonymous"
+            nonce="@Model.Nonce"
+            ></script>
+	<script nonce="@Model.Nonce">hljs.highlightAll();</script>			
+}	
+	<script nonce="@Model.Nonce">
+        window.cookieconsent.initialise({
+        "palette": {
+            "popup": {
+            "background": "#343c66",
+            "text": "#cfcfe8"
+            },
+            "button": {
+            "background": "#f71559"
+            }
+        },
+        "showLink": false,
+        "theme": "classic",
+        "content": {
+            "message": "Cookie Warning! My blog uses Google Analytics so Google knows you are here. Maybe others too, including FBI, CIA, NASA, ESA, IIS and other acronyms. If you don't like it, you must unfortunately go :(",
+            "dismiss": "It's just code, I 'll stay!"
+        }
+        });
+	</script>	
+</body>
+
+</html>

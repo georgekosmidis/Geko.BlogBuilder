@@ -1,0 +1,12 @@
+{
+  "TemplateDataModel": "CardCalendarEventsModel",
+  "Title": "My next events!",
+  "Description": "",
+  "Footer": "",
+  "Link": "",
+  "LinkTarget": "",
+  "ImageUrl": "",
+  "Position": 2,
+  "IsSticky": true,
+  "RightColumnPosition" : 2
+}

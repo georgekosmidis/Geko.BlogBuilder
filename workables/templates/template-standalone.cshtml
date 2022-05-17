@@ -1,0 +1,58 @@
+@using Blog.Builder.Models.Templates;
+
+<div class="container">
+	<div class="row mx-auto article-google-engine-top">
+		<div class="col pb-4">
+			<div class="card text-center bg-transparent border-0" style="height:33px">
+				<script async src="https://cse.google.com/cse.js?cx=c67a1214306f44e87" nonce="@Model.Nonce"></script>
+				<div class="gcse-searchbox-only"></div>
+			</div>
+		</div>
+	</div>
+	<div class="row mx-auto">
+		<div class="col-lg-8 mb-4 shadow bg-white rounded">
+			<div class="container article">
+				<div class="row">
+					<div class="col pt-3">
+						<h1 class="text-center display-6">@Model.Title</h1>
+					</div>  
+				</div>	
+@if ( !string.IsNullOrWhiteSpace(@Model.RelativeImageUrl) ) {
+				<div class="row">
+					<div class="col text-center">
+						<img src="@Model.RelativeImageUrl" alt="@Model.Title"/>
+					</div>
+				</div>
+}
+				<div class="row">
+					<div class="col pt-3 pb-6">
+						@Model.Body
+					</div>
+				</div>
+				<div class="row">
+					<div class="col p-4">
+                        &nbsp;
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="col-lg-4">
+			<div class="container px-0 mx-0 right-column-container">
+				<div class="col mb-2 text-center">
+					<a class="btn" href="/" role="button" style="text-decoration:none">
+						<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" class="mb-1" fill="currentColor" class="bi bi-house-fill" viewBox="0 0 16 16">
+							<path fill-rule="evenodd" d="m8 3.293 6 6V13.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 13.5V9.293l6-6zm5-.793V6l-2-2V2.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5z"></path>
+							<path fill-rule="evenodd" d="M7.293 1.5a1 1 0 0 1 1.414 0l6.647 6.646a.5.5 0 0 1-.708.708L8 2.207 1.354 8.854a.5.5 0 1 1-.708-.708L7.293 1.5z"></path>
+						</svg>
+						Would you like to visit the start page?
+					</a>
+				</div>
+				@foreach(var card in @Model.RightColumnCards){
+					<div class="col mb-4">
+					@card
+					</div>
+				}
+			</div>
+		</div>
+	</div>
+</div>
