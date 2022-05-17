@@ -1,5 +1,5 @@
 # A static blog builder for developers, written in .NET 6 and all C# 10 goodies!
-It started as my ```nullable reference types``` playground because this option is now enabled by default (C# 10 project templates), but it evolved as a command-line **static blog builder** project! So yes, this repo is used to automatically build my very own blog that you can find at https://blog.georgekosmidis.net :)
+It started as my ```nullable reference types``` playground because this option is now enabled by default (C# 10 project templates), but it evolved as a command-line **static blog builder** project! So yes, a clone of this repo is used to automatically build my very own blog that you can find at https://blog.georgekosmidis.net :)
 
 Feel free to fork the solution and create your own! Contact [me](https://georgekosmidis.net) for any questions or additional support, like deploying for free as an Azure Static Web App (_I am faster if you use [twitter](https://twitter.com/intent/tweet?text=I%20have%20a%20question%20about%20your%20blog%20builder,%20George&url=https://github.com/georgekosmidis/blog.georgekosmidis.net&via=georgekosmidis) :)_ )
 
