@@ -1,4 +1,4 @@
-# A static blog builder for developers, written in .NET 6 and all C# 10 goodies!
+# A static blog builder, written in .NET 6. Hosted for free in Azure Static Web Apps and published with either Azure DevOps or Github Actions.
 
 [![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fgeorgekosmidis%2Fblog.net%2Fmain%2FAzureDeploy.json) 
 
@@ -49,8 +49,8 @@ Feel free to fork the solution and create your own! Contact [me](https://georgek
 ## There is no UI!
 The builder is actually a ```Console App```, which you can use as a pipeline step in ```Azure DevOps``` and automate the build and publishing of your static website. If you want to build your site locally, either open the [_src/Blog.Builder.sln](_src/Blog.Builder.sln) solution and run it or just run the [/build.ps1](/build.ps1) powershell.
 
-### The yml file
-The [azure-pipelines.yml](/azure-pipelines.yml) contains the following steps:
+### Azure Devops deployment - the yml file
+The [azure-pipelines.yml](/azure-pipelines.yml) contains the following steps, can be used to directly push the [\_output](/_output) folder into an Azure Static Web App. It container the following tasks:
 
 1. ```task: UseDotNet@2``` - Use .NET 6
  Changes the version of .NET to .NET 6 for the subsequent tasks
@@ -65,6 +65,12 @@ The [azure-pipelines.yml](/azure-pipelines.yml) contains the following steps:
  
 > The footer of the website contains a DateTime with the last build
  
+### Github Actions deployment - the yml files
+#### /.github/workflows/prepare-static-app.yml
+It is building a fresh [\_src/Blog.Builder](_src/Blog.Builder), and uses the fresh baked assembly to build the static files, push the into a new feature branch and open a pull request. It is trigger when changes happen to the [workables](/workables) folder.
+#### /.github/workflows/push-static-app.yml
+As the name implies, it is used to push the data of a fresh [\_output](/_output) to the Azure Static Web App. It needs additionaly the deployment token of your Azure Static Web App as a Github Secret by the name: _AZURE_STATIC_APP_KEY_
+
 ### Folder Structure
 
 - [_output](/_output)
