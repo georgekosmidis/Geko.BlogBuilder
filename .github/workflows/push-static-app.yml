@@ -1,0 +1,28 @@
+name: Azure Static Web Apps CI/CD
+
+on:
+  push:
+    branches: main
+    paths: _output
+  pull_request:
+    types: [closed]
+    branches: main
+
+jobs:
+  build_and_deploy_job:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - uses: actions/checkout@v2
+        name: checkout
+        with:
+          submodules: true
+          
+      - name: Build And Deploy
+        uses: Azure/static-web-apps-deploy@v1
+        with:
+          azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_APP_KEY }}
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          action: "upload"
+          app_location: "/_output"
+
