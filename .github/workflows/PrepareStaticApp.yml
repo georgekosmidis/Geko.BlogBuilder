@@ -1,4 +1,4 @@
-name: Build Static App
+name: Prepare Static App
 
 on:
   push:
