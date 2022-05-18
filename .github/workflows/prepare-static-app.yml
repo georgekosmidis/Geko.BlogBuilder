@@ -4,7 +4,7 @@ on:
   push:
     branches: [ main ]
     paths: workables/**
-    
+
 jobs:
   build-static-app:
     runs-on: ubuntu-latest
@@ -34,14 +34,16 @@ jobs:
       id: push_output
       run: |
            cd _output
-           branchname=feature/build-$(date +"%Y.%m.%d-%H.%M.%S")-${{ github.run_number }}
+           branchbasename=build-$(date +"%Y.%m.%d-%H.%M.%S")-${{ github.run_number }}
+           branchname=feature/${branchbasename}
            git config user.name  ${{ github.actor }}
            git config user.email  ${{ github.actor }}@github.com
            git branch ${branchname}
            git push --set-upstream origin ${branchname}
            git checkout ${branchname}
            git add .
-           git commit --allow-empty -m "Automated static files build "
+           git commit --allow-empty -m "Automated static files build"
+           git tag automated-${branchbasename}
            git push
            echo "::set-output name=branchname::${branchname}"
 
