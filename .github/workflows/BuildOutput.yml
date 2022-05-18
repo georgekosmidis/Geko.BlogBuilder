@@ -44,13 +44,13 @@ jobs:
            git push
            echo "::set-output name=branchname::${branchname}"
 
-    - name: Create Pull Request
+    - name: pull-request
       uses: actions/github-script@v6
       with:
         script: |
           const { repo, owner } = context.repo;
           const result = await github.rest.pulls.create({
-            title: '[New Output] A user has added new content that is ready to be published.',
+            title: '[User Added Content] A user has added new content that is ready to be published.',
             owner,
             repo,
             head: '${{ steps.push_output.outputs.branchname }}',
@@ -64,5 +64,5 @@ jobs:
             owner,
             repo,
             issue_number: result.data.number,
-            labels: ['feature', 'automated pr']
+            labels: ['user-added', 'automated-pr']
           });
