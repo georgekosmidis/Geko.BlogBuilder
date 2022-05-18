@@ -224,7 +224,7 @@ else {
                 //sliding window for paging:
                 var windowSize = 5;
                 var startPage = 0;
-                var endPage = startPage + windowSize;
+                var endPage = startPage + Math.Min(windowSize,@Model.Paging.PageCount);
                 if( @Model.Paging.CurrentPageIndex > windowSize / 2 ) {
                     startPage = @Model.Paging.CurrentPageIndex - (int)Math.Floor(windowSize / 2d);
                     endPage = @Model.Paging.CurrentPageIndex + (int)Math.Ceiling(windowSize / 2d);
