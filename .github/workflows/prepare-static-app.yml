@@ -41,6 +41,7 @@ jobs:
            branchname=feature/${branchbasename}
            git config user.name  ${{ github.actor }}
            git config user.email  ${{ github.actor }}@github.com
+           git pull
            git branch ${branchname}
            git push --set-upstream origin ${branchname}
            git checkout ${branchname}
