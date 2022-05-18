@@ -5,7 +5,7 @@ on:
     branches: [ main ]
 
 jobs:
-  build:
+  build-builder:
     runs-on: ubuntu-latest
 
     steps:
@@ -23,12 +23,24 @@ jobs:
 
     - name: publish-builder
       run: dotnet publish ./_src/Blog.Builder.sln --output tmp
-
+      
+  build-static-app:
+    needs: [build-builder] 
+    runs-on: ubuntu-latest
+    
+    steps:
+    
     - name: build-output
       run: |
            cd tmp
            dotnet Blog.Builder.dll --workables ../workables --output ../_output
 
+  create-pull-request:
+    needs: [build-builder, build-static-app] 
+    runs-on: ubuntu-latest
+    
+    steps:
+    
     - name: push-output
       id: push_output
       run: |
@@ -66,3 +78,4 @@ jobs:
             issue_number: result.data.number,
             labels: ['user-added', 'automated-pr']
           });
+
