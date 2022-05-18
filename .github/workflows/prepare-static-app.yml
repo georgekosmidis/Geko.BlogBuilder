@@ -4,7 +4,10 @@ on:
   push:
     branches: [ main ]
     paths: workables/**
-
+  schedule:
+    - cron: '0 3 * * *' # run at 03 AM UTC
+  workflow_dispatch:
+  
 jobs:
   build-static-app:
     runs-on: ubuntu-latest
@@ -69,4 +72,11 @@ jobs:
             issue_number: result.data.number,
             labels: ['user-added', 'automated-pr']
           });
+          if( '${{ github.event_name }}' == 'workflow_dispatch'} {
+            github.rest.pulls.merge({
+              owner,
+              repo,
+              pull_number,
+            });
+          }
 
