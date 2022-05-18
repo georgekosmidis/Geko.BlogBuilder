@@ -12,8 +12,7 @@ jobs:
     steps:
     - name: checkout-code
     - uses: actions/checkout@v3
-    
-    
+  
     - name: setup-dotnet
       uses: actions/setup-dotnet@v2
       with:
@@ -24,11 +23,5 @@ jobs:
   
     - name: publish-builder
       run: dotnet publish _src/Blog.Builder.sln --output tmp
-      
-    
-    - name: build-output
-      run: |
-           cd tmp
-           dotnet Blog.Builder.dll --workables ../workables --output ../_output
 
 
