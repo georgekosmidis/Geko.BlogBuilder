@@ -19,7 +19,6 @@ jobs:
         dotnet-version: 6.0.x
         
     - name: build-builder
-      run: dotnet build _src/Blog.Builder.sln
-  
+      run: dotnet build ./_src/Blog.Builder.sln
 
 
