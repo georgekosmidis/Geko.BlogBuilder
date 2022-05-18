@@ -3,9 +3,10 @@ name: Prepare Static App
 on:
   push:
     branches: [ main ]
-
+    paths: './workables/**'
+    
 jobs:
-  build-builder:
+  build-static-app:
     runs-on: ubuntu-latest
 
     steps:
@@ -23,24 +24,12 @@ jobs:
 
     - name: publish-builder
       run: dotnet publish ./_src/Blog.Builder.sln --output tmp
-      
-  build-static-app:
-    needs: [build-builder] 
-    runs-on: ubuntu-latest
-    
-    steps:
     
     - name: build-output
       run: |
            cd tmp
            dotnet Blog.Builder.dll --workables ../workables --output ../_output
 
-  create-pull-request:
-    needs: [build-builder, build-static-app] 
-    runs-on: ubuntu-latest
-    
-    steps:
-    
     - name: push-output
       id: push_output
       run: |
