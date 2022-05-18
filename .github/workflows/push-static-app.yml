@@ -4,6 +4,7 @@ on:
   push:
     branches: main
     paths: _output/**
+    tags: automated-*
     
 jobs:
   deploy_static_app:
