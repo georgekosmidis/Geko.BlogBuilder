@@ -76,7 +76,7 @@ jobs:
             github.rest.pulls.merge({
               owner,
               repo,
-              pull_number,
+              result.data.number,
             });
           }
 
