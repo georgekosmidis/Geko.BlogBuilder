@@ -40,7 +40,7 @@ jobs:
            git branch ${branchname}
            git push --set-upstream origin ${branchname}
            git checkout ${branchname}
-           git add _output/
+           git add .
            git commit --allow-empty -m "Automated static files build "
            git push
            echo "::set-output name=branchname::${branchname}"
