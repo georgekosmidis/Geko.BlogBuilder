@@ -24,8 +24,4 @@ jobs:
     - name: publish-builder
       run: dotnet publish _src/Blog.Builder.sln --output tmp
 
-    - name: build-output
-      run: |
-           cd tmp
-           dotnet Blog.Builder.dll --workables ../workables --output ../_output
 
