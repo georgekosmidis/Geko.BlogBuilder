@@ -32,9 +32,11 @@ jobs:
     - name: push-output
       run: |
            cd _output
+           branchname=feature/build-$(date +"%Y.%m.%d-%H.%M.%S")-${{ github.run_number }}
            git config user.name  ${{ github.actor }}
            git config user.email  ${{ github.actor }}@github.com
-           git branch feature/build-$(date +"%Y.%m.%d-%H.%M.%S")-${{ github.run_number }}
+           git branch branchname
+           git checkout branchname
            git add .
            git commit --allow-empty -m "Action Build Static Files "
            git push
