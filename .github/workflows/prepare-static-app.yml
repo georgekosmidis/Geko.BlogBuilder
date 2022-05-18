@@ -72,7 +72,7 @@ jobs:
             issue_number: result.data.number,
             labels: ['user-added', 'automated-pr']
           });
-          if( '${{ github.event_name }}' == 'workflow_dispatch'} {
+          if( '${{ github.event_name }}' == 'workflow_dispatch') {
             github.rest.pulls.merge({
               owner,
               repo,
