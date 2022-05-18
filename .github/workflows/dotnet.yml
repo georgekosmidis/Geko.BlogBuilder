@@ -9,8 +9,23 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+    
     - name: checkout-code
-    - uses: actions/checkout@v3
+      uses: actions/checkout@v3.0.0
 
-        
+    - name: setup-dotnet
+      uses: actions/setup-dotnet@v2
+      with:
+        dotnet-version: 6.0.x
+
+    - name: build-builder
+      run: dotnet build './_src/Blog.Builder.sln'
+
+    - name: publish-builder
+      run: dotnet publish _src/Blog.Builder.sln --output tmp
+
+    - name: build-output
+      run: |
+           cd tmp
+           dotnet Blog.Builder.dll --workables ../workables --output ../_output        
 
