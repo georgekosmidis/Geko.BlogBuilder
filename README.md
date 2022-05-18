@@ -1,7 +1,8 @@
 # A static blog builder for developers, written in .NET 6 and all C# 10 goodies!
 
 [![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fgeorgekosmidis%2Fblog.net%2Fmain%2FAzureDeploy.json) 
-[![Prepare Static App](https://github.com/georgekosmidis/blog.net/actions/workflows/prepare-static-app.yml/badge.svg)](https://github.com/georgekosmidis/blog.net/actions/workflows/prepare-static-app.yml)
+
+[![Prepare Static App](https://github.com/georgekosmidis/blog.net/actions/workflows/prepare-static-app.yml/badge.svg)](https://github.com/georgekosmidis/blog.net/actions/workflows/prepare-static-app.yml) [![Push Static App](https://github.com/georgekosmidis/blog.net/actions/workflows/push-static-app.yml/badge.svg)](https://github.com/georgekosmidis/blog.net/actions/workflows/push-static-app.yml)
 
 It started as my ```nullable reference types``` playground because this option is now enabled by default (C# 10 project templates), but it evolved as a command-line **static blog builder** project! So yes, a clone of this repo is used to automatically build my very own blog that you can find at https://blog.georgekosmidis.net :)
 
