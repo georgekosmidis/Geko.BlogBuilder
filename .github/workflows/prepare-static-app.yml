@@ -3,7 +3,7 @@ name: Prepare Static App
 on:
   push:
     branches: [ main ]
-    paths: './workables/**'
+    paths: workables/**
     
 jobs:
   build-static-app:
