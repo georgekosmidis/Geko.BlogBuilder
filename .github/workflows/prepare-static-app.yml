@@ -43,11 +43,11 @@ jobs:
            git config user.email  ${{ github.actor }}@github.com
            git pull
            git branch ${branchname}
-           git push --set-upstream origin ${branchname}
+           git tag automated-${branchbasename}
+           git push --set-upstream origin ${branchname} --tags
            git checkout ${branchname}
            git add .
            git commit --allow-empty -m "Automated static files build"
-           git tag automated-${branchbasename}
            git push
            echo "::set-output name=branchname::${branchname}"
 
