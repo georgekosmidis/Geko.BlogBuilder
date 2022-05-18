@@ -19,19 +19,19 @@ jobs:
         dotnet-version: 6.0.x
 
     - name: build-builder
-      run: dotnet build './_src/Blog.Builder.sln'
+      run: dotnet build ./_src/Blog.Builder.sln
 
     - name: publish-builder
-      run: dotnet publish _src/Blog.Builder.sln --output tmp
+      run: dotnet publish ./_src/Blog.Builder.sln --output tmp
 
     - name: build-output
       run: |
            cd tmp
            dotnet Blog.Builder.dll --workables ../workables --output ../_output
 
-    - name: push-azuredeploy
+    - name: push-output
       run: |
-           cd ../_output
+           cd _output
            git config user.name  ${{ github.actor }}
            git config user.email  ${{ github.actor }}@github.com
            git add .
