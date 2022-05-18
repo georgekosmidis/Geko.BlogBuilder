@@ -32,7 +32,7 @@ Feel free to fork the solution and create your own! Contact [me](https://georgek
 ## Short description of features
 1. Completely **free**, builds and deploys automatically with ```Azure DevOps``` to an ```Azure Static Web App```.
 2. Fast and minified, loads in milliseconds (Check the [lighthouse report](https://raw.githubusercontent.com/georgekosmidis/blog.georgekosmidis.net/main/_readme/lighthouse.png)) 
-3. 4. A templating system based on ```Razor Engine``` and ```Bootstrap```.
+3. Featuring a templating system based on ```Razor Engine``` and ```Bootstrap```.
 5. Article and additional pages can be simple ```HTML``` with ```Bootstrap``` and ```highlightjs```.
 6. There are different templates for every page group (e.g. article pages, index pages etc).
 7. Index pages are using a ```masonry``` card (grid) system.
