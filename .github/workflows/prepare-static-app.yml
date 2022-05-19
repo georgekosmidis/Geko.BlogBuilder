@@ -39,8 +39,8 @@ jobs:
            cd _output
            branchbasename=build-$(date +"%Y.%m.%d-%H.%M.%S")-${{ github.run_number }}
            branchname=feature/${branchbasename}
-           git config user.name  ${{ github.actor }}
-           git config user.email  ${{ github.actor }}@github.com
+           git config user.name blogbot # ${{ github.actor }}
+           git config user.email blogbot@github.com
            git pull
            git branch ${branchname}
            git tag automated-${branchbasename}
@@ -56,7 +56,7 @@ jobs:
       with:
         script: |
           const { repo, owner } = context.repo;
-          const result = await github.rest.pulls.create({
+          const pr = await github.rest.pulls.create({
             title: '[User Added Content] A user has added new content that is ready to be published.',
             owner,
             repo,
@@ -70,14 +70,14 @@ jobs:
           github.rest.issues.addLabels({
             owner,
             repo,
-            issue_number: result.data.number,
+            issue_number: pr.data.number,
             labels: ['user-added', 'automated-pr']
           });
           if( '${{ github.event_name }}' == 'workflow_dispatch') {
             github.rest.pulls.merge({
               owner,
               repo,
-              pull_number: result.data.number,
+              pull_number: pr.data.number,
             });
           }
 
