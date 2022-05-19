@@ -3,7 +3,10 @@ name: Push Static App
 on:
   push:
    paths: _output/**
-   
+  workflow_run:
+    workflows: ["Prepare Static App"]
+    types: completed
+      
 jobs:
   deploy_static_app:
     runs-on: ubuntu-latest
