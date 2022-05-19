@@ -2,7 +2,8 @@ name: Push Static App
 
 on:
   push:
-
+   paths: _output/**
+   
 jobs:
   deploy_static_app:
     runs-on: ubuntu-latest
