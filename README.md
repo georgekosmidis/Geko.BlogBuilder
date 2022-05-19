@@ -1,38 +1,53 @@
 # A static blog builder, written in .NET 6. Hosted for free in Azure Static Web Apps and published with either Azure DevOps or Github Actions.
 
-[![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fgeorgekosmidis%2Fblog.net%2Fmain%2FAzureDeploy.json) 
-
 [![Prepare Static App](https://github.com/georgekosmidis/blog.net/actions/workflows/prepare-static-app.yml/badge.svg)](https://github.com/georgekosmidis/blog.net/actions/workflows/prepare-static-app.yml) [![Push Static App](https://github.com/georgekosmidis/blog.net/actions/workflows/push-static-app.yml/badge.svg)](https://github.com/georgekosmidis/blog.net/actions/workflows/push-static-app.yml)
 
-It started as my ```nullable reference types``` playground because this option is now enabled by default (C# 10 project templates), but it evolved as a command-line **static blog builder** project! So yes, a clone of this repo is used to automatically build my very own blog that you can find at https://blog.georgekosmidis.net :)
 
-Feel free to fork the solution and create your own! Contact [me](https://georgekosmidis.net) for any questions or additional support, like deploying for free as an Azure Static Web App (_I am faster if you use [twitter](https://twitter.com/intent/tweet?text=I%20have%20a%20question%20about%20your%20blog%20builder,%20George&url=https://github.com/georgekosmidis/blog.georgekosmidis.net&via=georgekosmidis) :)_ )
+## Table of Contents
+  - [Table of Contents](#table-of-contents)
+  - [Quick Start Guide](#quick-start-guide)
+  - [Background](#background)
+  - [Lighthouse report of the index page](#lighthouse-report-of-the-index-page)
+  - [Short description of features](#short-description-of-features)
+  - [There is no UI to push changes!](#there-is-no-ui-to-push-changes)
+    - [Github Actions deployment - the yml files](#github-actions-deployment---the-yml-files)
+      - [/.github/workflows/prepare-static-app.yml](#githubworkflowsprepare-static-appyml)
+      - [/.github/workflows/push-static-app.yml](#githubworkflowspush-static-appyml)
+  - [Folder Structure](#folder-structure)
+  - [Templating](#templating)
+    - [Current template dependencies](#current-template-dependencies)
+    - [Main templates:](#main-templates)
+    - [Card templates](#card-templates)
+  - [Index Page](#index-page)
+  - [Writing a new article](#writing-a-new-article)
+  - [Adding a "standalone" page](#adding-a-standalone-page)
+  - [The "Just Copy Me" folder](#the-just-copy-me-folder)
+  - [Additional Cards](#additional-cards)
+    - [Calendar Event Card](#calendar-event-card)
+  - [Commenting System](#commenting-system)
+  - [Migrating from WordPress](#migrating-from-wordpress)
+  - [That's it!](#thats-it)
+  - [And that is how my blog looks like!](#and-that-is-how-my-blog-looks-like)
+
+
+## Quick Start Guide
+1. Fork this repo
+2. [![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fgeorgekosmidis%2Fblog.net%2Fmain%2FAzureDeploy.json) 
+3. Go to the newly create resource, the new Azure Static Web App, click on ```Manage Deployment Token```, and copy it
+4. Return to your forked repo, go to ```Settings``` > ```Secrets``` > ```Actions```, add a new secret with the name AZURE_DEPLOYMENT_TOKEN and paste the deployment token from the previous step.
+
+Done! 
+Test it by going to ```Actions``` > ```Prepare Static App``` > ```Run Workflo```w and approve the newly created ```Pull Request```. Once these step are completed go the the assigned URL (it's where the ```Manage Deployment Token``` was) and voila! Your Sample Blog is ready. If you need support feel free to reach out: https://georgekosmidis.net.
+
+And by the way, my blog is using this solution: https://blog.georgekosmidis.net
+
+## Background
+It started as my ```nullable reference types``` playground, because this option is now enabled by default (C# 10 project templates), but it evolved as a command-line **static blog builder** project! So yes, a clone of this repo is used to automatically build my very own blog that you can find at https://blog.georgekosmidis.net :)
 
 > The solution follows fail-fast and throws an ```Exception``` when something is not as it should. This is by design because I wouldn't want to go forward and automatically publish my blog unless the process completed smoothly and with no errors at all. If you find that an error is forgiven, please [let me know](https://georgekosmidis.net) and I will immediately throw an exception :) 
 
 ## Lighthouse report of the index page
 [![Lighthouse report of blog.georgekosmidis.net](_readme/lighthouse.png)](https://raw.githubusercontent.com/georgekosmidis/blog.georgekosmidis.net/main/_readme/lighthouse.png)
-
-## Table of Contens
-* [Lighthouse report of the index page](#lighthouse-report-of-the-index-page)
-* [Short description of features](#short-description-of-features)
-* [There is no UI!](#there-is-no-ui-)
-    * [The yml file](#the-yml-file)
-    * [Folder Structure](#folder-structure)
-* [Templating](#templating)
-    * [Current template dependencies](#current-template-dependencies)
-    * [Main templates:](#main-templates)
-    * [Card templates](#card-templates)
-* [Index Page](#index-page)
-* [Writing a new article](#writing-a-new-article)
-* [Adding a "standalone" page](#adding-a--standalone--page)
-* [The "Just Copy Me" folder](#the--just-copy-me--folder)
-* [Additional Cards](#additional-cards)
-    * [Calendar Event Card](#calendar-event-card)
-* [Commenting System](#commenting-system)
-* [Migrating from WordPress](#migrating-from-wordpress)
-* [That's it!](#that-s-it-)
-* [And that is how my blog looks like!](#and-that-is-how-my-blog-looks-like) 
 
 ## Short description of features
 1. Completely **free**, builds and deploys automatically with ```Azure DevOps``` to an ```Azure Static Web App```.
@@ -46,32 +61,18 @@ Feel free to fork the solution and create your own! Contact [me](https://georgek
 10. There are can be additional pages like a privacy page.
 11. SEO was in mind during building, with ```Open Graph``` tags and ```sitemap.xml``` build automatically in the root of the website. 
 
-## There is no UI!
-The builder is actually a ```Console App```, which you can use as a pipeline step in ```Azure DevOps``` and automate the build and publishing of your static website. If you want to build your site locally, either open the [_src/Blog.Builder.sln](_src/Blog.Builder.sln) solution and run it or just run the [/build.ps1](/build.ps1) powershell.
-
-### Azure Devops deployment - the yml file
-The [azure-pipelines.yml](/azure-pipelines.yml) contains the following steps, can be used to directly push the [\_output](/_output) folder into an Azure Static Web App. It container the following tasks:
-
-1. ```task: UseDotNet@2``` - Use .NET 6
- Changes the version of .NET to .NET 6 for the subsequent tasks
-1. ```task: DotNetCoreCLI@2``` - Build all solutions
- Builds all solutions to create fresh assemblies and to check that everything builds correctly
-1. ```task: DotNetCoreCLI@2``` Publishing to ```$(tmpFolder)```
- Publishes the solution to the $(tmpFolder) defined as a variable at the beggining of the script
-1. ```task: PowerShell@2``` - Running Builder
- Runs the builder with powershell by passing the two mandatory arguments: The location of the ```workables``` and the location of the ```_output```
-1. ```task: AzureStaticWebApp@0``` - Pushing to Azure
- Does what it describes, pushes the contents of the ```_output``` folder to an ```Azure Static Web App.```
- 
-> The footer of the website contains a DateTime with the last build
+## There is no UI to push changes!
+The builder is actually a ```Console App```, which you can use as a step in ```Github Actions``` and automate the build and publishing of your static website. If you want to build your site locally, either open the [_src/Blog.Builder.sln](_src/Blog.Builder.sln) solution and run it or just run the [/ManualBuild.ps1](/ManualBuild.ps1) powershell.
  
 ### Github Actions deployment - the yml files
 #### /.github/workflows/prepare-static-app.yml
-It is building a fresh [\_src/Blog.Builder](_src/Blog.Builder), and uses the fresh baked assembly to build the static files, push the into a new feature branch and open a pull request. It is trigger when changes happen to the [workables](/workables) folder.
+It is building a fresh [\_src/Blog.Builder](_src/Blog.Builder), and uses the fresh baked assembly to build the static files, push the into a new feature branch and open a pull request. It is triggering when changes happen to the [workables](/workables) folder. 
 #### /.github/workflows/push-static-app.yml
 As the name implies, it is used to push the data of a fresh [\_output](/_output) to the Azure Static Web App. It needs additionaly the deployment token of your Azure Static Web App as a Github Secret by the name: _AZURE_STATIC_APP_KEY_
 
-### Folder Structure
+\* There is a nighlty build trigger that tries to push a fresh copy of your website at around 03:00 UTC. If you dont want that, you would need to open  [/.github/workflows/prepare-static-app.yml](/.github/workflows/prepare-static-app.yml) and manually remove the trigger.
+
+## Folder Structure
 
 - [_output](/_output)
  This is where the final HTML goes after the builder runs. The contents are picked up by a pipeline step and pushed to an (yours) ```Azure Static Web App.```
