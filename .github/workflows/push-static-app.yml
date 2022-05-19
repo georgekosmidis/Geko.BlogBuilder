@@ -2,8 +2,7 @@ name: Push Static App
 
 on:
   push:
-    branches: main
-    paths: _output/**
+
     tags: automated-**
     
 jobs:
