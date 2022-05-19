@@ -43,8 +43,7 @@ jobs:
            git config user.email blogbot@github.com
            git pull
            git branch ${branchname}
-           git tag automated-${branchbasename}
-           git push --set-upstream origin ${branchname} --tags
+           git push --set-upstream origin ${branchname} 
            git checkout ${branchname}
            git add .
            git commit --allow-empty -m "Automated static files build"
@@ -73,11 +72,12 @@ jobs:
             issue_number: pr.data.number,
             labels: ['user-added', 'automated-pr']
           });
-
-          github.rest.pulls.merge({
-            owner,
-            repo,
-            pull_number: pr.data.number,
-          });
+          if( ${{ github.event_name }}  == 'schedule' ) {
+             github.rest.pulls.merge({
+               owner,
+               repo,
+               pull_number: pr.data.number,
+             });
+          }
 
 
