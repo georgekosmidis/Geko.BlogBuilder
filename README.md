@@ -34,9 +34,10 @@
 1. Fork this repo
 2. [![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fgeorgekosmidis%2Fblog.net%2Fmain%2FAzureDeploy.json) 
 3. Go to the newly create resource, the new Azure Static Web App, click on ```Manage Deployment Token```, and copy it
-4. Return to your forked repo, go to ```Settings``` > ```Secrets``` > ```Actions```, add a new secret with the name AZURE_DEPLOYMENT_TOKEN and paste the deployment token from the previous step.
+4. Return to your forked repo, go to ```Settings``` > ```Secrets``` > ```Actions```, add a new secret with the name ```AZURE_DEPLOYMENT_TOKEN``` and paste the deployment token from the previous step.
 
 Done! 
+
 Test it by going to ```Actions``` > ```Prepare Static App``` > ```Run Workflo```w and approve the newly created ```Pull Request```. Once these step are completed go the the assigned URL (it's where the ```Manage Deployment Token``` was) and voila! Your Sample Blog is ready. If you need support feel free to reach out: https://georgekosmidis.net.
 
 And by the way, my blog is using this solution: https://blog.georgekosmidis.net
