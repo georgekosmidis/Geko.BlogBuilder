@@ -32,7 +32,7 @@
 
 ## Quick Start Guide
 1. Fork this repo
-2. [![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fgeorgekosmidis%2Fblog.net%2Fmain%2FAzureDeploy.json) 
+2. Create the necessary Azure Static Web App by clicking here: [![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fgeorgekosmidis%2Fblog.net%2Fmain%2FAzureDeploy.json) 
 3. Go to the newly create resource, the new Azure Static Web App, click on ```Manage Deployment Token```, and copy it
 4. Return to your forked repo, go to ```Settings``` > ```Secrets``` > ```Actions```, add a new secret with the name ```AZURE_DEPLOYMENT_TOKEN``` and paste the deployment token from the previous step.
 
