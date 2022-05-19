@@ -72,7 +72,7 @@ jobs:
             issue_number: pr.data.number,
             labels: ['user-added', 'automated-pr']
           });
-          if( ${{ github.event_name }}  == 'schedule' ) {
+          if( '${{ github.event_name }}'  == 'schedule' ) {
              github.rest.pulls.merge({
                owner,
                repo,
