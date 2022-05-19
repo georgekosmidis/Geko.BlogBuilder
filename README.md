@@ -1,4 +1,4 @@
-# A static blog builder, written in .NET 6. Hosted for free in Azure Static Web Apps and published with either Azure DevOps or Github Actions.
+# A static blog builder written in .NET 6 to help you hosted your blog for free in Azure Static Web Apps with an automated publishment using Github Actions.
 
 [![Prepare Static App](https://github.com/georgekosmidis/blog.net/actions/workflows/prepare-static-app.yml/badge.svg)](https://github.com/georgekosmidis/blog.net/actions/workflows/prepare-static-app.yml) [![Push Static App](https://github.com/georgekosmidis/blog.net/actions/workflows/push-static-app.yml/badge.svg)](https://github.com/georgekosmidis/blog.net/actions/workflows/push-static-app.yml)
 
