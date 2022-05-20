@@ -63,7 +63,7 @@ jobs:
           }
           const { repo, owner } = context.repo;
           const pr = await github.rest.pulls.create({
-            title: '[User Added Content] A user has added new content that is ready to be published.',
+            title: title,
             owner,
             repo,
             head: '${{ steps.push_output.outputs.branchname }}',
