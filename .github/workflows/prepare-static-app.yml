@@ -39,7 +39,7 @@ jobs:
            cd _output
            branchbasename=build-$(date +"%Y.%m.%d-%H.%M.%S")-${{ github.run_number }}
            branchname=feature/${branchbasename}
-           git config user.name blogbot # ${{ github.actor }}
+           git config user.name blogbot
            git config user.email blogbot@github.com
            git pull
            git branch ${branchname}
@@ -54,6 +54,13 @@ jobs:
       uses: actions/github-script@v6
       with:
         script: |
+          title = '[User Added Content] User ${{ github.actor }} has added new content that is ready to be published.'
+          if( '${{ github.event_name }}'  == 'schedule' ) {
+             title = '[Nightly Build] Automated publishment triggered by a schedule.'
+          }
+          if( '${{ github.event_name }}'  == 'workflow_dispatch' ) {
+             title = '[Manual Trigger] User ${{ github.actor }} triggered this workflow.'
+          }
           const { repo, owner } = context.repo;
           const pr = await github.rest.pulls.create({
             title: '[User Added Content] A user has added new content that is ready to be published.',
@@ -66,14 +73,15 @@ jobs:
               '[actions/github-script](https://github.com/actions/github-script).'
             ].join('\n')
           });
+          
           github.rest.issues.addLabels({
             owner,
             repo,
             issue_number: pr.data.number,
-            labels: ['user-added', 'automated-pr']
+            labels: ['${{ github.event_name }}', 'automated-pr']
           });
           
-          if( '${{ github.event_name }}'  == 'workflow_dispatch' ) {
+          if( '${{ github.event_name }}'  == 'schedule' ) {
              github.rest.pulls.merge({
                owner,
                repo,
@@ -86,7 +94,7 @@ jobs:
    # https://docs.github.com/en/actions/security-guides/automatic-token-authentication#using-the-github_token-in-a-workflow
     - name: deploy
       uses: Azure/static-web-apps-deploy@v1
-      if: ${{ github.event_name }}'  == 'workflow_dispatch'
+      if: ${{ github.event_name }}'  == 'schedule'
       with:
         azure_static_web_apps_api_token: ${{ secrets.AZURE_DEPLOYMENT_TOKEN }}
         repo_token: ${{ secrets.GITHUB_TOKEN }}
