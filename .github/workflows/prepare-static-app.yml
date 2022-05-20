@@ -72,12 +72,24 @@ jobs:
             issue_number: pr.data.number,
             labels: ['user-added', 'automated-pr']
           });
-          if( '${{ github.event_name }}'  == 'schedule' ) {
+          
+          if( '${{ github.event_name }}'  == 'workflow_dispatch' ) {
              github.rest.pulls.merge({
                owner,
                repo,
                pull_number: pr.data.number,
              });
           }
-
+    
+   # When you use the repository's GITHUB_TOKEN to perform tasks,
+   #  events triggered by the GITHUB_TOKEN will not create a new workflow run.
+   # https://docs.github.com/en/actions/security-guides/automatic-token-authentication#using-the-github_token-in-a-workflow
+    - name: deploy
+      uses: Azure/static-web-apps-deploy@v1
+      if: ${{ github.event_name }}'  == 'workflow_dispatch'
+      with:
+        azure_static_web_apps_api_token: ${{ secrets.AZURE_DEPLOYMENT_TOKEN }}
+        repo_token: ${{ secrets.GITHUB_TOKEN }}
+        action: "upload"
+        app_location: "/_output"
 
