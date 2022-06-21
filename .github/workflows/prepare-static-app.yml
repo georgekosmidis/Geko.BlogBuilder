@@ -4,8 +4,9 @@ on:
   push:
     branches: [ main ]
     paths: workables/**
-  schedule:
-    - cron: '0 3 * * *' # run at 03 AM UTC
+# uncomment these lines for a scheduled publishment
+#  schedule:
+#    - cron: '0 3 * * *' # run at 03 AM UTC
   workflow_dispatch:
   
 jobs:
