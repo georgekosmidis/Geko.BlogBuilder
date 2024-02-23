@@ -18,6 +18,16 @@ public record class LayoutStandaloneModel : LayoutModelBase
     }
 
     /// <summary>
+    /// The calculated path for the small version of the image.
+    /// The smaller version is automatically created from <see cref="Services.PageProcessor.ProcessPage{T}(string)"/>.
+    /// </summary>
+    public string? RelativeImageUrlSmall => RelativeImageUrl is null
+                ? null
+                : (Path.GetDirectoryName(RelativeImageUrl) ?? string.Empty).Replace("\\", "/")
+                    + "/"
+                    + Path.GetFileNameWithoutExtension(RelativeImageUrl) + "-small" + Path.GetExtension(RelativeImageUrl);
+
+    /// <summary>
     /// Validates what this object knows and throws an exception if something is wrong.
     /// Check the <see cref="Validate"/> source code for the validations.
     /// </summary>

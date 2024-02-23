@@ -29,7 +29,6 @@ public record class LayoutModelBase : ModelBase
         Sections = new List<string>();
         ExtraHeaders = new List<string>();
         DateExpires = DateTime.MaxValue;
-
     }
 
     /// <summary>
@@ -64,6 +63,17 @@ public record class LayoutModelBase : ModelBase
     /// </summary>
     public string RelativeUrl { get; set; }
 
+    /// <summary>
+    /// The absolute URL of the current page.
+    /// </summary>
+    public string AbsoluteUrl
+    {
+        get
+        {
+            return string.Concat(this.BlogUrl.TrimEnd('/'), "/", this.RelativeUrl.TrimStart('/'));
+        }
+    }
+
 
     /// <summary>
     /// The title of the current page.
@@ -73,22 +83,22 @@ public record class LayoutModelBase : ModelBase
     /// <summary>
     /// The tags of the current page.
     /// </summary>
-    public IEnumerable<string> Tags { get; }
+    public List<string> Tags { get; set; }
 
     /// <summary>
     /// A text representation for the <see cref="Tags"/> list.
     /// </summary>
-    public string TagsText => string.Join(", ", Tags);
+    public string TagsText => string.Join(", ", Tags.Distinct().OrderBy(x => x));
 
     /// <summary>
     /// The section list of the current page.
     /// </summary>
-    public IEnumerable<string> Sections { get; }
+    public List<string> Sections { get; set; }
 
     /// <summary>
     /// A text representation for the <see cref="Sections"/> list.
     /// </summary>
-    public string SectionsText => string.Join(", ", Sections);
+    public string SectionsText => string.Join(", ", Sections.Distinct().OrderBy(x => x));
 
     /// <summary>
     /// Any list of extra headers to be included in the current page.
@@ -98,7 +108,7 @@ public record class LayoutModelBase : ModelBase
     /// <summary>
     /// A text representation for the <see cref="ExtraHeaders"/> list.
     /// </summary>
-    public string ExtraHeadersText => string.Join(", ", ExtraHeaders);
+    public string ExtraHeadersText => string.Join(", ", ExtraHeaders.Distinct());
 
     /// <summary>
     /// An HTML description of the current page.
@@ -125,6 +135,17 @@ public record class LayoutModelBase : ModelBase
     /// The path to the main image of this page.
     /// </summary>
     public string? RelativeImageUrl { get; set; }
+
+    /// <summary>
+    /// The path to the main image of this page.
+    /// </summary>
+    public string? AbsoluteImageUrl
+    {
+        get
+        {
+            return String.IsNullOrWhiteSpace(RelativeImageUrl) ? RelativeImageUrl : string.Concat(this.BlogUrl.TrimEnd('/'), "/", this.RelativeImageUrl.TrimStart('/'));
+        }
+    }
 
     /// <summary>
     /// The HTML body of this page.

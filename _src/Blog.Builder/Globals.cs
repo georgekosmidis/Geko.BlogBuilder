@@ -117,6 +117,11 @@ public static class Globals
     public const string ContentHtmlFilename = "content.html";
 
     /// <summary>
+    /// The filename of the md for an article or a standalone
+    /// </summary>
+    public const string ContentMdFilename = "content.md";
+
+    /// <summary>
     /// The filename of the google sitemap.
     /// </summary>
     public const string GoogleSitemap = "sitemap.xml";

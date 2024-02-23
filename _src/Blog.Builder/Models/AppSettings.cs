@@ -5,6 +5,7 @@
 /// </summary>
 public record class AppSettings
 {
+
     /// <summary>
     /// The number of cards per page (defauls is 9).
     /// </summary>
@@ -33,14 +34,6 @@ public record class AppSettings
     {
         get
         {
-            //ugly hack because I always forget to change the appsettings blogUrl
-            if (blogUrl is not default(string?) and not "https://blog.georgekosmidis.net")
-            {
-#if RELEASE
-                throw new Exception("You forgot to change the BlogUrl from the appsettings, AGAIN!");
-#endif
-            }
-
 
             return blogUrl!;
         }

@@ -30,7 +30,7 @@ public record class LayoutSitemapModel : ModelBase
     /// <param name="dateModified"> The last modified date.</param>
     public void Add(string relativeUrl, DateTime dateModified)
     {
-        Urls.Add(new Url { RelativeUrl = relativeUrl, DateModified = dateModified });
+        Urls.Add(new Url { RelativeUrl = relativeUrl.Trim('/'), DateModified = dateModified });
     }
 
     /// <summary>

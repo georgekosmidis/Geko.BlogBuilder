@@ -115,7 +115,6 @@ internal class PageBuilder : IPageBuilder
             ExceptionHelpers.ThrowIfNull(articleData);
 
             var footer = articleData.DateModifiedText == articleData.DatePublishedText ? $"Published {articleData.DatePublishedText}" : $"Modified {articleData.DateModifiedText}";
-
             var cardData = new CardArticleModel(appSettings)
             {
                 TemplateDataModel = nameof(CardArticleModel),
@@ -129,6 +128,7 @@ internal class PageBuilder : IPageBuilder
                 Footer = footer
             };
             _cardPreparation.ProcessArticleCard(cardData, pageData.DatePublished);
+
         }
 
         return mainBuilderResult;

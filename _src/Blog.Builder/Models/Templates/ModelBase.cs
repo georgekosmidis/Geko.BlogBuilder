@@ -20,6 +20,7 @@ public record class ModelBase
         AuthorPersonalPage = appSettings.AuthorPersonalPage;
         AuthorName = appSettings.AuthorName;
         BlogTitle = appSettings.BlogTitle;
+        BlogUrl = appSettings.BlogUrl;
         BlogDescription = appSettings.BlogDescription;
     }
 

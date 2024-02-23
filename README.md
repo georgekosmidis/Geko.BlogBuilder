@@ -1,4 +1,4 @@
-# A static blog builder written in .NET 6 to help you hosted your blog for free in Azure Static Web Apps with an automated publishment using Github Actions.
+# A static blog builder written in .NET 8 to help you hosted your blog for free in Azure Static Web Apps with an automated publishment using Github Actions.
 
 [![Prepare Static App](https://github.com/georgekosmidis/blog.net/actions/workflows/prepare-static-app.yml/badge.svg)](https://github.com/georgekosmidis/blog.net/actions/workflows/prepare-static-app.yml) [![Push Static App](https://github.com/georgekosmidis/blog.net/actions/workflows/push-static-app.yml/badge.svg)](https://github.com/georgekosmidis/blog.net/actions/workflows/push-static-app.yml)
 
@@ -130,8 +130,8 @@ Not all of the cards are displayed in the index page. The index page is paged in
 The name of the produced index is ```index.html``` and the rest are named following the pattern ```index-page-{PAGE_NUMBER}.html```. A paging is added at the end of each index page.
 
 ## Writing a new article
-Everything is done from the file system using ```HTML```, ```Razor``` and ```JSON``` files, so you can use your favorite HTML editor! 
-The process includes creating a folder in the [articles](workables/articles) folder and then creating a file named ```content.html``` to write the body of your article using ```HTML```, ```Razor```, ```highlightjs``` and ```Bootstrap``` styling. 
+Everything is done from the file system using ```HTML``` or ```Mark Down```, ```Razor``` and ```JSON``` files, so you can use your favorite HTML editor! 
+The process includes creating a folder in the [articles](workables/articles) folder and then creating a file named ```content.html``` or ```content.md``` to write the body of your article using ```HTML``` or ```Mark Down```, ```Razor```, ```highlightjs``` and ```Bootstrap``` styling. 
 
 Once done you should then create a ```content.json``` file for the article metadata with the following properties:
 

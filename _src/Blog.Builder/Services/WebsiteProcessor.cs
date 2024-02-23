@@ -94,6 +94,12 @@ internal class WebsitePreparation : IWebsiteProcessor
         var articleDirectories = Directory.GetDirectories(
             Path.Combine(Globals.WorkingFolderPath, Globals.WorkingArticlesFolderName)
         );
+
+        //hide work-in-progress from production
+#if !DEBUG
+        articleDirectories = articleDirectories.Where(x => !x.Contains("-WIP")).ToArray();
+#endif
+
         foreach (var directory in articleDirectories)
         {
             _pageProcessor.ProcessPage<LayoutArticleModel>(directory);
