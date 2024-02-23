@@ -1,7 +1,10 @@
 # A static blog builder written in .NET 8 to help you hosted your blog for free in Azure Static Web Apps with an automated publishment using Github Actions.
 
-[![Prepare Static App](https://github.com/georgekosmidis/blog.net/actions/workflows/prepare-static-app.yml/badge.svg)](https://github.com/georgekosmidis/blog.net/actions/workflows/prepare-static-app.yml) [![Push Static App](https://github.com/georgekosmidis/blog.net/actions/workflows/push-static-app.yml/badge.svg)](https://github.com/georgekosmidis/blog.net/actions/workflows/push-static-app.yml)
+[![Prepare Static App](https://github.com/georgekosmidis/geko.blogbuilder/actions/workflows/prepare-static-app.yml/badge.svg)](https://github.com/georgekosmidis/geko.blogbuilder/actions/workflows/prepare-static-app.yml) [![Push Static App](https://github.com/georgekosmidis/geko.blogbuilder/actions/workflows/push-static-app.yml/badge.svg)](https://github.com/georgekosmidis/geko.blogbuilder/actions/workflows/push-static-app.yml)
 
+> You can check a live example here: https://blog.georgekosmidis.net
+> 
+> ... and its source code here: https://github.com/georgekosmidis/blog.georgekosmidis.net
 
 ## Table of Contents
   - [Table of Contents](#table-of-contents)
