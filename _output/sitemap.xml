@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <urlset xmlns = "http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
-        <loc>http://blogbase/privacy.html</loc>
+        <loc>https://brave-moss-0b56bd110.1.azurestaticapps.net/privacy.html</loc>
         <lastmod>2021-12-25T16:49:25+00:00</lastmod>
     </url>
     <url>
-        <loc>http://blogbase/just-add-a-url-you-want-this-article-to-live.html</loc>
+        <loc>https://brave-moss-0b56bd110.1.azurestaticapps.net/just-add-a-url-you-want-this-article-to-live.html</loc>
         <lastmod>2021-12-26T16:23:53+00:00</lastmod>
     </url>
     <url>
-        <loc>http://blogbase/</loc>
-        <lastmod>2024-02-23T16:50:16+00:00</lastmod>
+        <loc>https://brave-moss-0b56bd110.1.azurestaticapps.net/</loc>
+        <lastmod>2024-03-01T11:02:49+00:00</lastmod>
     </url>
 </urlset>
